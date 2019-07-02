@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id "cup.gradle.cup-gradle-plugin" version "1.2"
+    id "org.xbib.gradle.plugin.jflex" version "1.2.0"
+}
+
+group 'com.kraken'
+version '0.0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jflex {
+    source = new File('src/main/resources/jflex')
+    generateDir = getProject().file("$project.buildDir/src/gen/java")
+}
+
+cup {
+    sourceDir = 'src/main/resources/cup'
+    generateDir = "$project.buildDir/src/gen/java"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += ["$project.buildDir/src/gen/java"]
+        }
+    }
+}
+
+dependencies {
+
+}
